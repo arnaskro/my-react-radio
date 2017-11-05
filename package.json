@@ -1,0 +1,20 @@
+{
+  "name": "my-radio",
+  "description": "",
+  "homepage": "https://kromelis.lt/",
+  "dependencies": {
+    "react": "15.6.1",
+    "react-dom": "15.6.1",
+    "react-scripts": "1.0.10",
+    "react-sound": "0.8.0",
+    "redux-zero": "4.3.0"
+  },
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
