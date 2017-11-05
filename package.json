@@ -1,7 +1,7 @@
 {
   "name": "my-radio",
   "description": "",
-  "homepage": "https://kromelis.lt/",
+  "homepage": "https://arnaskro.github.io/my-react-radio/",
   "dependencies": {
     "react": "15.6.1",
     "react-dom": "15.6.1",
@@ -15,6 +15,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "npm run build && git subtree push --prefix build origin gh-pages"
   }
 }
