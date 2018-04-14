@@ -4,6 +4,7 @@ import { connect } from "redux-zero/react";
 import actions from "./actions";
 import RadioList from './RadioList';
 import ControlBar from './ControlBar';
+import Header from './Header';
 
 class Radio extends React.Component {
 
@@ -11,6 +12,7 @@ class Radio extends React.Component {
     if (this.props.active !== null) 
       return <Sound
           url={this.props.active.url}
+          volume={this.props.volume}
           playStatus={(this.props.playing || this.props.loading) ? Sound.status.PLAYING : Sound.status.PAUSED}
           onPlaying={() => this.props.loading && !this.props.playing ? this.props.setPlaying() : ""}
         />
@@ -19,6 +21,7 @@ class Radio extends React.Component {
   render() {
     return (
       <div className="Radio">
+        <Header />
         <RadioList />
         <ControlBar />
         {this.soundPlayer()}
@@ -27,6 +30,6 @@ class Radio extends React.Component {
   }
 } 
 
-const mapToProps = ({ active, playing, loading, list }) => ({ active, playing, loading, list });
+const mapToProps = ({ active, playing, loading, list, volume }) => ({ active, playing, loading, list, volume });
 
 export default connect(mapToProps, actions)(Radio);

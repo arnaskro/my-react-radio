@@ -6,9 +6,11 @@ body{
 
 .Radio {
   width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
-  margin-top: 10px;
+  margin: 65px auto 0;
+}
+
+.RadioList {
+  margin-bottom: 82px;
 }
 
 .RadioList ul {
@@ -37,11 +39,14 @@ body{
 }
 
 .ControlBar {
-  margin-top: 10px;
   padding: 10px 20px;
-  border-radius: 3px;
   border: 1px solid rgba(0,0,0,.125);
   height: 60px;
+  position: fixed;
+  background-color: white;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .ControlBarButton {
@@ -56,17 +61,20 @@ body{
   background: #333;
   transition: opacity 150ms;
   opacity: 0.9;
+  position: relative;
 }
 
 .ControlBarButton.playing {
   background: #00b09b;
   background: -webkit-linear-gradient(to right, #96c93d, #00b09b);
   background: linear-gradient(to right, #96c93d, #00b09b);
+  animation: beat2 .3s cubic-bezier(.1,.7,.6,1.5);
 }
 .ControlBarButton.paused {
   background: #D38312;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #A83279, #D38312);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #A83279, #D38312); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */  
+  animation: beat .3s cubic-bezier(.1,.7,.6,1.5);
 }
 .ControlBarButton.loading {
   background: #22c1c3;  /* fallback for old browsers */
@@ -88,21 +96,175 @@ body{
 }
 
 .SelectedRadio {
-  display: inline-block;
+  display: block;
+  float: left;
   text-align: left;
   font-size: 14px;
   color: #333;
   font-weight: bold;
   padding-left: 30px;
   padding-top: 10px;
+  padding-right: 10px;
+  max-width: calc(100% - 150px);
 }
 
 .RadioStatus {
   color: #bebebe;
   text-transform: uppercase;
   font-size: 12px;
+  display: block;
+  position: relative;
 }
 
 .ActiveRadio {
   font-size: 20px;
+  display: block;
+  position: relative;
 }
+
+@keyframes beat { from {
+	transform: scale(.5);
+	opacity: 0;
+} }
+@keyframes beat2 { from {
+	transform: scale(.5);
+	opacity: 0;
+} }
+
+.ControlBarButton:before {
+  content: "";
+  height: 60px;
+  width: 60px;
+  display: block;
+  position: absolute;
+  border-radius: 100px;
+  border: 0px solid black;
+  z-index: 10;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.ControlBarButton.paused::before {
+  animation: borderBeat .6s cubic-bezier(.1,.7,.6,1.5);
+}
+
+.ControlBarButton.playing::before {
+  animation: borderBeat2 .6s cubic-bezier(.1,.7,.6,1.5);
+}
+
+@keyframes borderBeat { 
+  0%   { border: 0px solid #D38312;  opacity: 0; height: 60px; width: 60px; background-color: rgba(255, 255, 255, 0)  }
+  50%  { border: 1px solid #D38312;  opacity: .5; background-color: rgba(255, 255, 255, 0.5) }
+  100% { border: 0px solid #A83279;  opacity: 0; height: 75px; width: 75px; background-color: rgba(255, 255, 255, 0)  }
+}
+
+@keyframes borderBeat2 { 
+  0%   { border: 0px solid #00b09b;  opacity: 0; height: 60px; width: 60px; background-color: rgba(255, 255, 255, 0)  }
+  50%  { border: 1px solid #00b09b;  opacity: .5; background-color: rgba(255, 255, 255, 0.5) }
+  100% { border: 0px solid #96c93d;  opacity: 0; height: 75px; width: 75px; background-color: rgba(255, 255, 255, 0)  }
+}
+
+.Header {
+  text-align: center;
+  padding: 10px;
+  background: #fff;
+  display: block;
+  position: fixed;
+  box-shadow: 0 2px 15px #0006;
+  width: calc(100% - 20px);
+  top: 0;
+}
+
+.Header .Logo {
+  max-width: 100%;
+  max-height: 40px;
+}
+
+
+.VolumeBar {
+  right: 0;
+  display: block;
+  position: fixed;
+  width: 15px;
+  padding: 30px 35px 28px 25px;
+  bottom: 1px;
+  border-left: 1px solid rgba(0,0,0,.125);
+  background: white;
+  transition: width 400ms;
+}
+
+.VolumeBar:hover {
+  width: 200px;
+}
+
+.VolumeBar i {
+  width: 30px;
+}
+
+.VolumeBar .rc-slider {
+  width: calc(100% - 30px);
+  display: none;
+}
+
+.VolumeBar:hover .rc-slider {
+  display: inline-block;
+}
+
+.rc-slider-handle{
+  transition: box-shadow 500ms;
+}
+
+.rc-slider-handle:focus, .rc-slider-handle:active {
+  box-shadow: 0 0 1px 2px #3fbe8e7d !important;
+}
+
+@media (min-width: 576px) {
+  
+  .VolumeBar:hover {
+    background: rgba(226, 226, 226, 0.1);
+  }
+  
+  .VolumeBar {
+    width: 200px
+  }
+
+  .VolumeBar .rc-slider {
+    width: calc(100% - 30px);
+    display: inline-block;
+  }
+
+}
+
+/* SoundWaves */
+#SoundWaves {
+  display: inline-block;
+  position: relative;
+  width: 30px;
+}
+
+.bar {
+  background: #d38312;
+  bottom: 1px;
+  height: 3px;
+  position: absolute;
+  width: 3px;      
+  animation: sound 0ms -800ms linear infinite alternate;
+}
+
+@keyframes sound {
+  0% {
+     opacity: .35;
+      height: 3px; 
+  }
+  100% {
+      opacity: 1;       
+      height: 13px;        
+  }
+}
+
+.bar:nth-child(1)  { left: 1px; animation-duration: 474ms; }
+.bar:nth-child(2)  { left: 5px; animation-duration: 433ms; }
+.bar:nth-child(3)  { left: 9px; animation-duration: 407ms; }
+.bar:nth-child(4)  { left: 13px; animation-duration: 458ms; }
+.bar:nth-child(5)  { left: 17px; animation-duration: 400ms; }

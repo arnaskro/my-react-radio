@@ -11,7 +11,11 @@ class RadioList extends React.Component {
         <ul>
           {this.props.list.map((radio, index) => 
             <RadioListItem {...radio} key={index} 
-              _selectRadio={() => this.props.changeRadio(radio)}
+              _selectRadio={() => {
+                // Set loading to fire the loading animation
+                this.props.setLoading();
+                setTimeout(() => this.props.changeRadio(radio), 100);
+              }}
             /> )}
         </ul>
       </div>

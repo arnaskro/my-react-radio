@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from "redux-zero/react";
 import actions from "./actions";
+import VolumeBar from "./VolumeBar";
 
 class ControlBar extends React.Component {
   
@@ -24,7 +25,18 @@ class ControlBar extends React.Component {
 
   RadioStatus() {
     if (this.props.playing)
-      return "Now playing";
+      return (
+        <div>
+          <div id='SoundWaves'>
+            <div className='bar'></div>
+            <div className='bar'></div>
+            <div className='bar'></div>
+            <div className='bar'></div>
+            <div className='bar'></div>
+          </div>
+          Now playing
+        </div>
+      );
     else if(this.props.loading)
       return "Please wait...";
     else
@@ -55,6 +67,7 @@ class ControlBar extends React.Component {
               {this.props.active.title}
             </div>
           </div>
+          <VolumeBar />
         </div>
       )
   }
