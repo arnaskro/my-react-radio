@@ -14,7 +14,16 @@ class RadioList extends React.Component {
               _selectRadio={() => {
                 // Set loading to fire the loading animation
                 this.props.setLoading();
-                setTimeout(() => this.props.changeRadio(radio), 100);
+
+                // Give time for loading animation
+                setTimeout(() => {
+
+                  // Check if the radio is already playing
+                  if (this.props.active === radio)
+                    this.props.changeRadio(this.props.list.filter((item) => item !== radio)[0]);
+
+                  this.props.changeRadio(radio)
+                }, 100);
               }}
             /> )}
         </ul>

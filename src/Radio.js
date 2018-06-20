@@ -15,6 +15,7 @@ class Radio extends React.Component {
           volume={this.props.volume}
           playStatus={(this.props.playing || this.props.loading) ? Sound.status.PLAYING : Sound.status.PAUSED}
           onPlaying={() => this.props.loading && !this.props.playing ? this.props.setPlaying() : ""}
+          onBufferChange={() => console.log("hey")}
         />
   }
 
